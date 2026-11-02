@@ -1,0 +1,14 @@
+# Caller for actions-checkout repo, uses central reusable workflow in admin repo.
+# Central logic lives in infralicious/.github, version is updated there, not here.
+# Runs on PR to main, audit mode first, SARIF upload, no fail yet.
+# To make zizmor blocking later, update reusable workflow, then add zizmor as required check in admin safe-settings, in a separate PR.
+name: Zizmor
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  zizmor:
+    uses: infralicious/.github/.github/workflows/zizmor-reusable.yml@main
+    permissions:
+      contents: read
+      security-events: write
